@@ -21,4 +21,7 @@ export class OrderDataComponent implements OnInit {
     })
   }
 
+  selectOrder(id_pedido:number){
+    console.log("probando el evento: ",id_pedido);
+  }
 }
