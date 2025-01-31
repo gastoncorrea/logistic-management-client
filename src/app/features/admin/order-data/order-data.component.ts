@@ -10,6 +10,7 @@ export class OrderDataComponent implements OnInit {
 
   constructor(private orderDataService:OrderDataService) { }
   orderData:any = [];
+  orderDetail:any = [];
   ngOnInit(): void {
     this.getData();
   }
@@ -23,5 +24,9 @@ export class OrderDataComponent implements OnInit {
 
   selectOrder(id_pedido:number){
     console.log("probando el evento: ",id_pedido);
+    this.orderDataService.orderDetail(id_pedido).subscribe((res)=>{
+      this.orderDetail = res;
+      console.log(this.orderDetail);
+    })
   }
 }

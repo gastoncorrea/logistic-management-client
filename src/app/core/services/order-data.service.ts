@@ -12,4 +12,9 @@ export class OrderDataService {
   ordersData():Observable<any>{
     return this.http.get(this.URL)
   }
+
+  orderDetail(id_pedido:number):Observable<any>{
+    console.log(this.URL+id_pedido);
+    return this.http.get<any>(this.URL+id_pedido);
+  }
 }

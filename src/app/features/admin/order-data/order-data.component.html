@@ -10,7 +10,7 @@
       </tr>
     </thead>
     <tbody class="table-group-divider">
-      <tr *ngFor="let data of orderData" (click)="selectOrder(data.nro_pedido)">
+      <tr *ngFor="let data of orderData" (click)="selectOrder(data.id_pedido)">
         <th scope="row">{{ data.id_pedido }}</th>
         <td>{{ data.nro_pedido }}</td>
         <td>{{ data.fecha | date: 'dd MMM YYYY'}}</td>
