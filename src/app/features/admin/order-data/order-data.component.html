@@ -1,57 +1,71 @@
-<div class="container border">
+<div class="container">
+  <table class="table table-sm table-striped table-hover text-center">
+    <thead>
+      <tr class="position-sticky bg-success">
+        <th scope="col">Id Pedido</th>
+        <th scope="col" class="p-3">Nro de pedido</th>
+        <th scope="col" class="p-3">Fecha</th>
+        <th scope="col" class="p-3">ID cliente</th>
+        <th scope="col" class="p-3">ID ubicacion</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <tr *ngFor="let data of orderData" (click)="selectOrder(data)">
+        <th scope="row">{{ data.id_pedido }}</th>
+        <td>{{ data.nro_pedido }}</td>
+        <td>{{ data.fecha | date : "dd MMM YYYY" }}</td>
+        <td>{{ data.id_cliente }}</td>
+        <td>{{ data.id_ubicacion }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="container">
   <div class="row">
-    <div class="col-md-8">
-      <table class="table table-striped table-hover text-center">
-        <thead>
-          <tr class="position-sticky bg-success">
-            <th scope="col">Id Pedido</th>
-            <th scope="col" class="p-3">Nro de pedido</th>
-            <th scope="col" class="p-3">Fecha</th>
-            <th scope="col" class="p-3">ID cliente</th>
-            <th scope="col" class="p-3">ID ubicacion</th>
-          </tr>
-        </thead>
-        <tbody class="table-group-divider">
-          <tr
-            *ngFor="let data of orderData"
-            (click)="selectOrder(data)"
-          >
-            <th scope="row">{{ data.id_pedido }}</th>
-            <td>{{ data.nro_pedido }}</td>
-            <td>{{ data.fecha | date : "dd MMM YYYY" }}</td>
-            <td>{{ data.id_cliente }}</td>
-            <td>{{ data.id_ubicacion }}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="col-6">
+      <h6 class="control-label">Nro Pedido:</h6>
+      <p class="">{{ orderDetailView.nro_pedido }}</p>
     </div>
-    <div class="col-md-4 ">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 row">
-            <label for="nro-pedido" class="control-label col-md-7 p-0">Nro Pedido:</label>
-            <input value="#23456" class="col-md-5 p-0" id="nro_pedido" disabled>
-          </div>
-          <div class="col-md-6 row">
-            <label for="fecha" class="control-label col-md-5 pe-0">Fecha:</label>
-            <input value="16-02-2025" class="col-md-7 p-0" id="fecha" disabled>       
-          </div>
-        </div>
-        <h6>Nombre del Cliente:</h6>
-        <h4 *ngIf="orderDetailView">{{orderDetailView.nombre_cliente}}</h4>
-        <h6>Localidad:</h6>
-        <h4 *ngIf="orderDetailView">{{orderDetailView.ubicacion}}</h4>
-        <div class="d-flex justify-content-between align-items-center">
-          <h6>Nombre del producto:</h6>
-          <h6>Cantidad:</h6>
-        </div>
-        <div *ngIf="orderDetailView">
-          <div *ngFor="let detail of orderDetailView.detalle_pedido" class="d-flex justify-content-between align-items-center">
-            <h4>{{detail.producto}}</h4>
-            <h4>{{detail.cantidad}}</h4>
-          </div>
-        </div>
-      </div>
+    <div class="col-6">
+      <h6 class="control-label">Fecha:</h6>
+      <p class="">{{ orderDetailView.fecha }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <h6 class="control-label col-md-6">Nombre del Cliente:</h6>
+    <p class="col-md-6">{{ orderDetailView.nombre_cliente }}</p>
+  </div>
+  <div class="row">
+    <div class="col-8">
+      <h6>Localidad:</h6>
+      <p>{{ orderDetailView.ubicacion }}</p>
+    </div>
+    <div class="col-4">
+      <h6>CP:</h6>
+      <p>{{ orderDetailView.cp}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-5">
+      <h6 >Direccion:</h6>
+      <p>{{ orderDetailView.direccion }}</p>
+    </div>
+    <div class="col-5">
+      <h6>Más detalles:</h6>
+      <p>{{ orderDetailView.direccion2 }}</p>
+    </div>
+  </div>
+  <div class="d-flex justify-content-between align-items-center">
+    <h6>Nombre del producto:</h6>
+    <h6>Cantidad:</h6>
+  </div>
+  <div *ngIf="orderDetailView">
+    <div
+      *ngFor="let detail of orderDetailView.detalle_pedido"
+      class="d-flex justify-content-between align-items-center"
+    >
+      <h4>{{ detail.producto }}</h4>
+      <h4>{{ detail.cantidad }}</h4>
     </div>
   </div>
 </div>
