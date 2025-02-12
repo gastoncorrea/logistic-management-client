@@ -11,7 +11,19 @@ export class OrderDataComponent implements OnInit {
   constructor(private orderDataService:OrderDataService) { }
   orderData:any = [];
   orderDetail:any = [];
-  orderDetailView:any;
+  orderDetailView:any = {
+    nro_pedido : "#234764",
+    fecha:"12-02-2025",
+    nombre_cliente: "Gaston Correa",
+    detalle_pedido: [{
+      producto: "Alfombra para poner abajo de la puerta",
+      cantidad: 2
+    }],
+    direccion: "Mendoza 2139",
+    direccion2: "1er piso dpto 'A'",
+    ubicacion: "San Miguel de Tucuman",
+    cp: "4000"
+  };
   ngOnInit(): void {
     this.getData();
   }
