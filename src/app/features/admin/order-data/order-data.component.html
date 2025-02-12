@@ -1,47 +1,57 @@
-<div class="container row">
-  <div class="col-md-7">
-    <table class="table table-striped table-hover text-center">
-      <thead>
-        <tr class="position-sticky bg-success">
-          <th scope="col">Id Pedido</th>
-          <th scope="col" class="p-3">Nro de pedido</th>
-          <th scope="col" class="p-3">Fecha</th>
-          <th scope="col" class="p-3">ID cliente</th>
-          <th scope="col" class="p-3">ID ubicacion</th>
-        </tr>
-      </thead>
-      <tbody class="table-group-divider">
-        <tr
-          *ngFor="let data of orderData"
-          (click)="selectOrder(data)"
-        >
-          <th scope="row">{{ data.id_pedido }}</th>
-          <td>{{ data.nro_pedido }}</td>
-          <td>{{ data.fecha | date : "dd MMM YYYY" }}</td>
-          <td>{{ data.id_cliente }}</td>
-          <td>{{ data.id_ubicacion }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div *ngIf="orderDetailView" class="col-md-3 text-center">
-    <div>
-      <h1>Nro Pedido:</h1>
-      <h4>{{orderDetailView.nro_pedido}}</h4>
-      <h1>Fecha:</h1>
-      <h4>{{orderDetailView.fecha}}</h4>
-      <h1>Nombre del Cliente:</h1>
-      <h4>{{orderDetailView.nombre_cliente}}</h4>
-      <div class="d-flex justify-content-between align-items-center">
-        <h1>Nombre del producto:</h1>
-        <h1>Cantidad:</h1>
+<div class="container border">
+  <div class="row">
+    <div class="col-md-8">
+      <table class="table table-striped table-hover text-center">
+        <thead>
+          <tr class="position-sticky bg-success">
+            <th scope="col">Id Pedido</th>
+            <th scope="col" class="p-3">Nro de pedido</th>
+            <th scope="col" class="p-3">Fecha</th>
+            <th scope="col" class="p-3">ID cliente</th>
+            <th scope="col" class="p-3">ID ubicacion</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr
+            *ngFor="let data of orderData"
+            (click)="selectOrder(data)"
+          >
+            <th scope="row">{{ data.id_pedido }}</th>
+            <td>{{ data.nro_pedido }}</td>
+            <td>{{ data.fecha | date : "dd MMM YYYY" }}</td>
+            <td>{{ data.id_cliente }}</td>
+            <td>{{ data.id_ubicacion }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4 ">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 row">
+            <label for="nro-pedido" class="control-label col-md-7 p-0">Nro Pedido:</label>
+            <input value="#23456" class="col-md-5 p-0" id="nro_pedido" disabled>
+          </div>
+          <div class="col-md-6 row">
+            <label for="fecha" class="control-label col-md-5 pe-0">Fecha:</label>
+            <input value="16-02-2025" class="col-md-7 p-0" id="fecha" disabled>       
+          </div>
+        </div>
+        <h6>Nombre del Cliente:</h6>
+        <h4 *ngIf="orderDetailView">{{orderDetailView.nombre_cliente}}</h4>
+        <h6>Localidad:</h6>
+        <h4 *ngIf="orderDetailView">{{orderDetailView.ubicacion}}</h4>
+        <div class="d-flex justify-content-between align-items-center">
+          <h6>Nombre del producto:</h6>
+          <h6>Cantidad:</h6>
+        </div>
+        <div *ngIf="orderDetailView">
+          <div *ngFor="let detail of orderDetailView.detalle_pedido" class="d-flex justify-content-between align-items-center">
+            <h4>{{detail.producto}}</h4>
+            <h4>{{detail.cantidad}}</h4>
+          </div>
+        </div>
       </div>
-      <div *ngFor="let detail of orderDetailView.detalle_pedido" class="d-flex justify-content-between align-items-center">
-        <h4>{{detail.producto}}</h4>
-        <h4>{{detail.cantidad}}</h4>
-      </div>
-      <h1>Ubicacion:</h1>
-      <h4>{{orderDetailView.ubicacion}}</h4>
     </div>
   </div>
 </div>
