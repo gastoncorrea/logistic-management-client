@@ -2,11 +2,11 @@
   <table class="table table-sm table-striped table-hover text-center">
     <thead>
       <tr class="position-sticky bg-success">
-        <th scope="col">Id Pedido</th>
+        <th scope="col" class="p-3">Id Pedido</th>
         <th scope="col" class="p-3">Nro de pedido</th>
         <th scope="col" class="p-3">Fecha</th>
-        <th scope="col" class="p-3">ID cliente</th>
-        <th scope="col" class="p-3">ID ubicacion</th>
+        <th scope="col" class="p-3">Cliente</th>
+        <th scope="col" class="p-3">Localidad</th>
       </tr>
     </thead>
     <tbody class="table-group-divider">
@@ -14,8 +14,8 @@
         <th scope="row">{{ data.id_pedido }}</th>
         <td>{{ data.nro_pedido }}</td>
         <td>{{ data.fecha | date : "dd MMM YYYY" }}</td>
-        <td>{{ data.id_cliente }}</td>
-        <td>{{ data.id_ubicacion }}</td>
+        <td>{{ data.nombre_cliente }}</td>
+        <td>{{ data.localidad }}</td>
       </tr>
     </tbody>
   </table>
@@ -36,36 +36,39 @@
     <p class="col-md-6">{{ orderDetailView.nombre_cliente }}</p>
   </div>
   <div class="row">
-    <div class="col-8">
+    <div class="col">
       <h6>Localidad:</h6>
-      <p>{{ orderDetailView.ubicacion }}</p>
+      <p>{{ orderDetailView.localidad }}</p>
     </div>
-    <div class="col-4">
+    <div class="col">
       <h6>CP:</h6>
       <p>{{ orderDetailView.cp}}</p>
     </div>
   </div>
   <div class="row">
-    <div class="col-5">
+    <div class="col">
       <h6 >Direccion:</h6>
       <p>{{ orderDetailView.direccion }}</p>
     </div>
-    <div class="col-5">
+    <div class="col">
       <h6>Más detalles:</h6>
       <p>{{ orderDetailView.direccion2 }}</p>
     </div>
   </div>
-  <div class="d-flex justify-content-between align-items-center">
-    <h6>Nombre del producto:</h6>
-    <h6>Cantidad:</h6>
-  </div>
-  <div *ngIf="orderDetailView">
-    <div
-      *ngFor="let detail of orderDetailView.detalle_pedido"
-      class="d-flex justify-content-between align-items-center"
-    >
-      <h4>{{ detail.producto }}</h4>
-      <h4>{{ detail.cantidad }}</h4>
-    </div>
+  <div>
+    <table class="table table-sm table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Nombre del producto</th>
+          <th scope="col">Un.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let detail of orderDetailView.detalle_pedido">
+          <td>{{ detail.producto }}</td>
+          <td class="p-3">{{ detail.cantidad }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

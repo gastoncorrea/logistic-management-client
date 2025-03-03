@@ -18,10 +18,13 @@ export class OrderDataComponent implements OnInit {
     detalle_pedido: [{
       producto: "Alfombra para poner abajo de la puerta",
       cantidad: 2
+    },{
+      producto: "Alfombra para poner abajo de la puerta",
+      cantidad: 2
     }],
     direccion: "Mendoza 2139",
     direccion2: "1er piso dpto 'A'",
-    ubicacion: "San Miguel de Tucuman",
+    localidad: "San Miguel de Tucuman",
     cp: "4000"
   };
   ngOnInit(): void {
@@ -43,9 +46,12 @@ export class OrderDataComponent implements OnInit {
       this.orderDetailView = {
         nro_pedido : pedido.nro_pedido,
         fecha:pedido.fecha,
-        nombre_cliente: pedido.id_cliente,
+        nombre_cliente: pedido.nombre_cliente,
         detalle_pedido: this.orderDetail,
-        ubicacion: pedido.id_ubicacion
+        localidad: pedido.localidad,
+        direccion: pedido.direccion,
+        direccion2: pedido.direccion2,
+        cp: pedido.cp
       }
       console.log(this.orderDetailView.detalle_pedido)
     })
