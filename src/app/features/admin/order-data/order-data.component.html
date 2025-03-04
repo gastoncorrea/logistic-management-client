@@ -10,65 +10,105 @@
       </tr>
     </thead>
     <tbody class="table-group-divider">
-      <tr *ngFor="let data of orderData" (click)="selectOrder(data)">
+      <tr
+        *ngFor="let data of orderData"
+        (click)="selectOrder(data)"
+        data-bs-toggle="modal"
+        data-bs-target="#detallePedido"
+      >
         <th scope="row">{{ data.id_pedido }}</th>
         <td>{{ data.nro_pedido }}</td>
-        <td>{{ data.fecha | date : "dd MMM YYYY" }}</td>
+        <td>{{ data.fecha | date:'dd-MM-yyyy'  }}</td>
         <td>{{ data.nombre_cliente }}</td>
         <td>{{ data.localidad }}</td>
       </tr>
     </tbody>
   </table>
 </div>
-<div class="container">
-  <div class="row">
-    <div class="col-6">
-      <h6 class="control-label">Nro Pedido:</h6>
-      <p class="">{{ orderDetailView.nro_pedido }}</p>
+<div
+  class="modal fade"
+  id="detallePedido"
+  tabindex="-1"
+  aria-labelledby="detallePedidoModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="detallePedidoModalLabel">Detalle del pedido</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-6">
+              <h6 class="control-label">Nro Pedido:</h6>
+              <p class="">{{ orderDetailView.nro_pedido }}</p>
+            </div>
+            <div class="col-6">
+              <h6 class="control-label">Fecha:</h6>
+              <p class="">{{ orderDetailView.fecha| date:'dd-MM-yyyy'  }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <h6 class="control-label">Nombre del Cliente:</h6>
+              <p>{{ orderDetailView.nombre_cliente }}</p>
+            </div>
+            <div class="col">
+              <h6 class="control-label">Email:</h6>
+              <p>{{ orderDetailView.email }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <h6>Localidad:</h6>
+              <p>{{ orderDetailView.localidad }}</p>
+            </div>
+            <div class="col">
+              <h6>CP:</h6>
+              <p>{{ orderDetailView.cp }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <h6>Direccion:</h6>
+              <p>{{ orderDetailView.direccion }}</p>
+            </div>
+            <div class="col">
+              <h6>Más detalles:</h6>
+              <p>{{ orderDetailView.direccion2 }}</p>
+            </div>
+          </div>
+          <div>
+            <table class="table table-sm table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Nombre del producto</th>
+                  <th scope="col">Un.</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let detail of orderDetailView.detalle_pedido">
+                  <td>{{ detail.producto }}</td>
+                  <td class="p-3">{{ detail.cantidad }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Volver
+        </button>
+        <button type="button" class="btn btn-primary">Hacer envio</button>
+      </div>
     </div>
-    <div class="col-6">
-      <h6 class="control-label">Fecha:</h6>
-      <p class="">{{ orderDetailView.fecha }}</p>
-    </div>
-  </div>
-  <div class="row">
-    <h6 class="control-label col-md-6">Nombre del Cliente:</h6>
-    <p class="col-md-6">{{ orderDetailView.nombre_cliente }}</p>
-  </div>
-  <div class="row">
-    <div class="col">
-      <h6>Localidad:</h6>
-      <p>{{ orderDetailView.localidad }}</p>
-    </div>
-    <div class="col">
-      <h6>CP:</h6>
-      <p>{{ orderDetailView.cp}}</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <h6 >Direccion:</h6>
-      <p>{{ orderDetailView.direccion }}</p>
-    </div>
-    <div class="col">
-      <h6>Más detalles:</h6>
-      <p>{{ orderDetailView.direccion2 }}</p>
-    </div>
-  </div>
-  <div>
-    <table class="table table-sm table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Nombre del producto</th>
-          <th scope="col">Un.</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let detail of orderDetailView.detalle_pedido">
-          <td>{{ detail.producto }}</td>
-          <td class="p-3">{{ detail.cantidad }}</td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>

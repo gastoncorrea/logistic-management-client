@@ -47,6 +47,7 @@ export class OrderDataComponent implements OnInit {
         nro_pedido : pedido.nro_pedido,
         fecha:pedido.fecha,
         nombre_cliente: pedido.nombre_cliente,
+        email: pedido.email,
         detalle_pedido: this.orderDetail,
         localidad: pedido.localidad,
         direccion: pedido.direccion,
