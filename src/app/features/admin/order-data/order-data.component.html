@@ -6,7 +6,7 @@
         <th scope="col" class="p-3">Nro de pedido</th>
         <th scope="col" class="p-3">Fecha</th>
         <th scope="col" class="p-3">Cliente</th>
-        <th scope="col" class="p-3">Localidad</th>
+        <th scope="col" class="p-3">Provincia</th>
       </tr>
     </thead>
     <tbody class="table-group-divider">
@@ -20,7 +20,7 @@
         <td>{{ data.nro_pedido }}</td>
         <td>{{ data.fecha | date:'dd-MM-yyyy'  }}</td>
         <td>{{ data.nombre_cliente }}</td>
-        <td>{{ data.localidad }}</td>
+        <td>{{ data.provincia }}</td>
       </tr>
     </tbody>
   </table>
@@ -67,8 +67,8 @@
           </div>
           <div class="row">
             <div class="col">
-              <h6>Localidad:</h6>
-              <p>{{ orderDetailView.localidad }}</p>
+              <h6>Provincia:</h6>
+              <p>{{ orderDetailView.provincia }}</p>
             </div>
             <div class="col">
               <h6>CP:</h6>

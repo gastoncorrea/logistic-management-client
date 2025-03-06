@@ -49,7 +49,7 @@ export class OrderDataComponent implements OnInit {
         nombre_cliente: pedido.nombre_cliente,
         email: pedido.email,
         detalle_pedido: this.orderDetail,
-        localidad: pedido.localidad,
+        provincia: pedido.provincia,
         direccion: pedido.direccion,
         direccion2: pedido.direccion2,
         cp: pedido.cp
