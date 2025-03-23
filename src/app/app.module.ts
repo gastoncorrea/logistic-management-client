@@ -5,17 +5,21 @@ import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { OrderDataComponent } from './features/admin/order-data/order-data.component';
 import { LoadFileComponent } from './features/admin/load-file/load-file.component';
+import { ShippingComponent } from './features/admin/shipping/shipping.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     OrderDataComponent,
-    LoadFileComponent
+    LoadFileComponent,
+    ShippingComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

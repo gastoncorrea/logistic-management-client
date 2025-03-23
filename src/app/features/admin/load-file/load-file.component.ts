@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild, inject } from '@angular/core';
 import { LoadFileService } from 'src/app/services/load-file.service';
+import {OrderDataComponent} from '../order-data/order-data.component'
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,7 +20,7 @@ export class LoadFileComponent implements OnInit, AfterViewInit {
   @ViewChild('dropArea') dropArea!: ElementRef;
 
 
-  constructor(private renderer2: Renderer2, private uploadService: LoadFileService) { }
+  constructor(private renderer2: Renderer2, private uploadService: LoadFileService,private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -133,6 +135,8 @@ export class LoadFileComponent implements OnInit, AfterViewInit {
          "Pedidos guardados: " + response.guardados + "\n" +
          "Pedidos duplicados: "  +response.duplicados
         );
+        this.router.navigate(['/order']);
+    
       },
       error => {
         console.error('Error al subir archivos:', error);
