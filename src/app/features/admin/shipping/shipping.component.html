@@ -1,1 +1,62 @@
-<p>shipping works!</p>
+<div class="row justify-content-center align-items-center">
+  <div class="card text-center col-sm-12 col-md-8 col-lg-6 my-5 shadow border-0 p-5">
+    <div class="card-header">Enviar pedido</div>
+    <div class="card-body">
+      <h5 class="card-title">Completa los datos del envio</h5>
+      <p class="card-text">
+        Selecciona quien es el responsable de llevar el pedido
+      </p>
+      <form [formGroup]="form" (ngSubmit)="sendForm()">
+        <div class="form-floating mb-4">
+          <input type="date" class="form-control border-0 border-bottom shadow-none" id="dateShipping"
+            placeholder="nombre del slide" formControlName="fecha" [ngClass]="{
+                'is-invalid': Fecha?.errors && Fecha?.touched,
+                'is-valid': !Fecha?.errors && Fecha?.touched
+              }" readonly/>
+          <label for="dateShipping" class="form-label">Fecha de envio</label>
+        </div>
+        <!-- Validation to input name -->
+        <div *ngIf="Fecha?.errors && Fecha?.touched">
+          <p *ngIf="Fecha?.hasError('required')" class="error">
+            Campo obligatorio
+          </p>
+        </div>
+        <div class="mb-4 form-floating">
+          <input type="text" class="form-control border-0 border-bottom shadow-none" id="nroPedido"
+            placeholder="numero de pedido" formControlName="nro_pedido" [ngClass]="{
+                'is-invalid': Nro_pedido?.errors && Nro_pedido?.touched,
+                'is-valid': !Nro_pedido?.errors && Nro_pedido?.touched
+              }" readonly/>
+          <label for="nroPedido" class="form-label">Nro de pedido:</label>
+        </div>
+        <!-- Validation to input name -->
+        <div *ngIf="Nro_pedido?.errors && Nro_pedido?.touched">
+          <p *ngIf="Nro_pedido?.hasError('required')" class="error">
+            Campo obligatorio
+          </p>
+        </div>
+        <div class="mb-4 form-floating">
+          <select class="form-control border-0 border-bottom shadow-none" id="idPedido"
+            placeholder="Identificacion rider" formControlName="id_rider" [ngClass]="{
+                'is-invalid': Id_rider?.errors && Id_rider?.touched,
+                'is-valid': !Id_rider?.errors && Id_rider?.touched
+              }">
+            <option value="" disabled selected>Seleccione un rider</option>
+            <!-- Aquí deberías agregar las opciones dinámicamente, con el id del rider como valor -->
+            <option *ngFor="let rider of riders" [value]="rider.id_rider">{{ rider.email }}</option>
+          </select>
+          <label for="id_rider" class="form-label">¿Quién lleva el pedido?</label>
+        </div>
+        <!-- Validation input Order -->
+        <div *ngIf="Id_rider?.errors && Id_rider?.touched">
+          <p *ngIf="Id_rider?.hasError('required')" class="error">
+            El campo es obligatorio
+          </p>
+        </div>
+        <button class="btn btn-outline-primary rounded-pill p-3 fw-bold mt-3 w-100" type="submit">
+          Registrar envio
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

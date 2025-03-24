@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild, inject } from '@angular/core';
-import { LoadFileService } from 'src/app/services/load-file.service';
+import { LoadFileService } from 'src/app/core/services/load-file.service';
 import {OrderDataComponent} from '../order-data/order-data.component'
 import { Router } from '@angular/router';
 

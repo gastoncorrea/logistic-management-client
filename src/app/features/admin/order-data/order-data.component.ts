@@ -11,29 +11,14 @@ export class OrderDataComponent implements OnInit {
   constructor(private orderDataService:OrderDataService) { }
   orderData:any = [];
   orderDetail:any = [];
-  orderDetailView:any = {
-    nro_pedido : "#234764",
-    fecha:"12-02-2025",
-    nombre_cliente: "Gaston Correa",
-    detalle_pedido: [{
-      producto: "Alfombra para poner abajo de la puerta",
-      cantidad: 2
-    },{
-      producto: "Alfombra para poner abajo de la puerta",
-      cantidad: 2
-    }],
-    direccion: "Mendoza 2139",
-    direccion2: "1er piso dpto 'A'",
-    localidad: "San Miguel de Tucuman",
-    cp: "4000"
-  };
+  orderDetailView:any = {};
   ngOnInit(): void {
     this.getData();
   }
 
   getData(){
     this.orderDataService.ordersData().subscribe((res)=>{
-      this.orderData = res;
+      this.orderData = res.en_proceso;
       console.log(res);
     })
   }
@@ -44,6 +29,7 @@ export class OrderDataComponent implements OnInit {
       this.orderDetail = res;
       console.log(this.orderDetail);
       this.orderDetailView = {
+        id_pedido: pedido.id_pedido,
         nro_pedido : pedido.nro_pedido,
         fecha:pedido.fecha,
         nombre_cliente: pedido.nombre_cliente,

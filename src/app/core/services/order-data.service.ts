@@ -8,13 +8,19 @@ import {Observable} from 'rxjs';
 export class OrderDataService {
 
   constructor(private http:HttpClient) { }
-  URL = "http://localhost:5000/"
+  URL = "http://localhost:5000/";
+  
   ordersData():Observable<any>{
     return this.http.get(this.URL)
   }
 
   orderDetail(id_pedido:number):Observable<any>{
-    console.log(this.URL+id_pedido);
-    return this.http.get<any>(this.URL+id_pedido);
+    console.log(this.URL+'detail/'+id_pedido);
+    return this.http.get<any>(this.URL+'detail/'+id_pedido);
+  }
+
+  orderFindById(id_pedido:number):Observable<any>{
+    console.log(this.URL+'order/'+id_pedido);
+    return this.http.get<any>(this.URL+'order/'+id_pedido);
   }
 }

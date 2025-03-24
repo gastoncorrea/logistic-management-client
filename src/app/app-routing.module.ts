@@ -8,7 +8,7 @@ import { ShippingComponent } from './features/admin/shipping/shipping.component'
 const routes: Routes = [
     { path: '', component: LoadFileComponent },  // Página principal
     { path: 'order', component: OrderDataComponent },  // Página "Acerca de"
-    { path: 'shipping', component: ShippingComponent } // Página 404
+    { path: 'shipping/:id', component: ShippingComponent } // Página 404
   ];
   
 
