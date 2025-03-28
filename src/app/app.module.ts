@@ -9,6 +9,7 @@ import { OrderDataComponent } from './features/admin/order-data/order-data.compo
 import { LoadFileComponent } from './features/admin/load-file/load-file.component';
 import { ShippingComponent } from './features/admin/shipping/shipping.component';
 import { NavbarComponent } from './features/admin/navbar/navbar.component';
+import { ShippingDataComponent } from './features/admin/shipping-data/shipping-data.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { NavbarComponent } from './features/admin/navbar/navbar.component';
     OrderDataComponent,
     LoadFileComponent,
     ShippingComponent,
-    NavbarComponent
+    NavbarComponent,
+    ShippingDataComponent
   ],
   imports: [
     BrowserModule,

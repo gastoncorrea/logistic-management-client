@@ -135,7 +135,7 @@ export class LoadFileComponent implements OnInit, AfterViewInit {
          "Pedidos guardados: " + response.guardados + "\n" +
          "Pedidos duplicados: "  +response.duplicados
         );
-        this.router.navigate(['/order']);
+        this.router.navigate(['/order/in-progress']);
     
       },
       error => {

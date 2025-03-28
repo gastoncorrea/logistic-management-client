@@ -1,0 +1,51 @@
+<div class="container">
+    <table class="table table-sm table-striped table-hover text-center">
+      <thead>
+        <tr class="position-sticky bg-success">
+          <th scope="col" class="p-3">Nro de pedido</th>
+          <th scope="col" class="p-3">Fecha de envio</th>
+          <th scope="col" class="p-3">Rider</th>
+          <th scope="col" class="p-3">Direccion</th>
+          <th scope="col" class="p-3">CP</th>
+          <th scope="col" class="p-3">Estado</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr
+          *ngFor="let data of shippingData"
+          (click)="selectShipping(data)"
+          data-bs-toggle="modal"
+          data-bs-target="#detalleEnvio"
+        >
+          <th scope="row">{{ data.nro_pedido }}</th>
+          <td>{{ data.fecha_envio | date:'dd-MM-yyyy'  }}</td>
+          <td>{{ data.rider}}</td>
+          <td>{{ data.direccion }}</td>
+          <td>{{ data.codigo_postal }}</td>
+          <td>{{ data.estado }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div
+    class="modal fade"
+    id="detalleEnvio"
+    tabindex="-1"
+    aria-labelledby="detalleEnvioModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="detalleEnvioModalLabel">Detalle del envio</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        </div>
+    </div>
+  </div>
+  
