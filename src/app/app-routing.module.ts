@@ -6,14 +6,24 @@ import { ShippingComponent } from './features/admin/shipping/shipping.component'
 
 
 const routes: Routes = [
-    { path: '', component: LoadFileComponent },  // Página principal
-    { path: 'order', component: OrderDataComponent },  // Página "Acerca de"
-    { path: 'shipping/:id', component: ShippingComponent } // Página 404
-  ];
-  
+  { path: '', component: LoadFileComponent },  // Página principal
 
-  @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
-  })
-  export class AppRoutingModule { }
+  {
+    path: 'order',
+    children: [
+      { path: 'in-progress', component: OrderDataComponent },
+      { path: 'sent', component: OrderDataComponent },
+      { path: 'delivered', component: OrderDataComponent },
+      { path: 'not-delivered', component: OrderDataComponent }
+    ]
+  },
+
+  { path: 'shipping/:id', component: ShippingComponent }
+];
+
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
