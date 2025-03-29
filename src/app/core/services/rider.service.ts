@@ -13,4 +13,8 @@ export class RiderService {
   getRiders(): Observable<any>{
     return this.http.get(this.URL)
   }
+
+  saveRider(rider:any):Observable<any>{
+    return this.http.post(this.URL, rider);
+  }
 }

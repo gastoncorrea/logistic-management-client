@@ -10,6 +10,8 @@ import { LoadFileComponent } from './features/admin/load-file/load-file.componen
 import { ShippingComponent } from './features/admin/shipping/shipping.component';
 import { NavbarComponent } from './features/admin/navbar/navbar.component';
 import { ShippingDataComponent } from './features/admin/shipping-data/shipping-data.component';
+import { RiderFormComponent } from './features/admin/rider-form/rider-form.component';
+import { RiderListComponent } from './features/admin/rider-list/rider-list.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { ShippingDataComponent } from './features/admin/shipping-data/shipping-d
     LoadFileComponent,
     ShippingComponent,
     NavbarComponent,
-    ShippingDataComponent
+    ShippingDataComponent,
+    RiderFormComponent,
+    RiderListComponent
   ],
   imports: [
     BrowserModule,

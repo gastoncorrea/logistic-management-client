@@ -4,6 +4,8 @@ import { LoadFileComponent } from './features/admin/load-file/load-file.componen
 import { OrderDataComponent } from './features/admin/order-data/order-data.component';
 import { ShippingComponent } from './features/admin/shipping/shipping.component';
 import { ShippingDataComponent } from './features/admin/shipping-data/shipping-data.component';
+import { RiderFormComponent } from './features/admin/rider-form/rider-form.component';
+import { RiderListComponent } from './features/admin/rider-list/rider-list.component';
 
 
 const routes: Routes = [
@@ -16,6 +18,13 @@ const routes: Routes = [
       { path: 'sent', component: ShippingDataComponent },
       { path: 'delivered', component: OrderDataComponent },
       { path: 'not-delivered', component: OrderDataComponent }
+    ]
+  },
+  {
+    path: 'rider',
+    children:[
+      {path:'post', component:RiderFormComponent},
+      {path:'list', component:RiderListComponent}
     ]
   },
 

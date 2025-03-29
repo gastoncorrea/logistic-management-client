@@ -1,0 +1,122 @@
+<div class="row justify-content-center align-items-center">
+    <div class="card text-center col-sm-12 col-md-8 col-lg-6 my-5 shadow border-0 p-5">
+      <div class="card-header">Registrar rider</div>
+      <div class="card-body">
+        <h5 class="card-title">Completa los datos del rider</h5>
+        <p class="card-text">
+          Completa el formulario para poder ser registrado
+        </p>
+        <form [formGroup]="form" (ngSubmit)="sendForm()">
+          <div class="form-floating mb-4">
+            <input type="text" class="form-control border-0 border-bottom shadow-none" id="nameRider"
+              placeholder="nombre del rider" formControlName="nombre" [ngClass]="{
+                  'is-invalid': Nombre?.errors && Nombre?.touched,
+                  'is-valid': !Nombre?.errors && Nombre?.touched
+                }"/>
+            <label for="nameRider" class="form-label">Nombre</label>
+          </div>
+          <!-- Validation to input name -->
+          <div *ngIf="Nombre?.errors && Nombre?.touched">
+            <p *ngIf="Nombre?.hasError('required')" class="error">
+              Campo obligatorio
+            </p>
+          </div>
+          <p *ngIf="Nombre?.errors?.['maxlength']" class="error">
+            El numero de caracteres debe ser menor a 50
+          </p>
+          <div class="mb-4 form-floating">
+            <input type="text" class="form-control border-0 border-bottom shadow-none" id="apellidoRider"
+              placeholder="Apellido del rider" formControlName="apellido" [ngClass]="{
+                  'is-invalid': Apellido?.errors && Apellido?.touched,
+                  'is-valid': !Apellido?.errors && Apellido?.touched
+                }"/>
+            <label for="apellidoRider" class="form-label">Apellido:</label>
+          </div>
+          <!-- Validation to input name -->
+          <div *ngIf="Apellido?.errors && Apellido?.touched">
+            <p *ngIf="Apellido?.hasError('required')" class="error">
+              Campo obligatorio
+            </p>
+          </div>
+          <p *ngIf="Apellido?.errors?.['maxlength']" class="error">
+            El numero de caracteres debe ser menor a 50
+          </p>
+          <div class="mb-4 form-floating">
+            <input type="email" class="form-control border-0 border-bottom shadow-none" id="emailRider"
+              placeholder="Email del rider" formControlName="email" [ngClass]="{
+                  'is-invalid': Email?.errors && Email?.touched,
+                  'is-valid': !Email?.errors && Email?.touched
+                }"/>
+            <label for="emailRider" class="form-label">Email:</label>
+          </div>
+          <!-- Validation to input name -->
+          <div *ngIf="Email?.errors && Email?.touched">
+            <p *ngIf="Email?.hasError('required')" class="error">
+              Campo obligatorio
+            </p>
+          </div>
+          <p *ngIf="Email?.errors?.['maxlength']" class="error">
+            El numero de caracteres debe ser menor a 50
+          </p>
+          <p *ngIf="Email?.hasError('email')" class="error">
+            Ingresa un email válido.
+          </p>
+          <div class="mb-4 form-floating">
+            <input type="text" class="form-control border-0 border-bottom shadow-none" id="dniRider"
+              placeholder="Dni del rider" formControlName="dni" [ngClass]="{
+                  'is-invalid': Dni?.errors && Dni?.touched,
+                  'is-valid': !Dni?.errors && Dni?.touched
+                }"/>
+            <label for="dniRider" class="form-label">Dni:</label>
+          </div>
+          <!-- Validation to input name -->
+          <div *ngIf="Dni?.errors && Dni?.touched">
+            <p *ngIf="Dni?.hasError('required')" class="error">
+              Campo obligatorio
+            </p>
+          </div>
+          <p *ngIf="Dni?.errors?.['maxlength']" class="error">
+            El numero de caracteres debe ser menor a 50
+          </p>
+          <div class="mb-4 form-floating">
+            <select class="form-control border-0 border-bottom shadow-none" id="vehiculo"
+              placeholder="Vehiculo del rider" formControlName="vehiculo" [ngClass]="{
+                  'is-invalid': Vehiculo?.errors && Vehiculo?.touched,
+                  'is-valid': !Vehiculo?.errors && Vehiculo?.touched
+                }">
+              <option value="" disabled selected>Seleccione su vehiculo</option>
+              <!-- Aquí deberías agregar las opciones dinámicamente, con el id del rider como valor -->
+              <option  value="MOTOCICLETA">Motocicleta</option>
+            </select>
+            <label for="vehiculo" class="form-label">Cual es su vehiculo</label>
+          </div>
+          <!-- Validation input Order -->
+          <div *ngIf="Vehiculo?.errors && Vehiculo?.touched">
+            <p *ngIf="Vehiculo?.hasError('required')" class="error">
+              El campo es obligatorio
+            </p>
+          </div>
+          <div class="mb-4 form-floating">
+            <input type="text" class="form-control border-0 border-bottom shadow-none" id="cedulaRider"
+              placeholder="Cedula del rider" formControlName="cedula" [ngClass]="{
+                  'is-invalid': Cedula?.errors && Cedula?.touched,
+                  'is-valid': !Cedula?.errors && Cedula?.touched
+                }"/>
+            <label for="cedulaRider" class="form-label">Cedula:</label>
+          </div>
+          <!-- Validation to input name -->
+          <div *ngIf="Cedula?.errors && Cedula?.touched">
+            <p *ngIf="Cedula?.hasError('required')" class="error">
+              Campo obligatorio
+            </p>
+          </div>
+          <p *ngIf="Cedula?.errors?.['maxlength']" class="error">
+            El numero de caracteres debe ser menor a 50
+          </p>
+          <button class="btn btn-outline-primary rounded-pill p-3 fw-bold mt-3 w-100" type="submit">
+            Registrar rider
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
