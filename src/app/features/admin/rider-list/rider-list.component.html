@@ -1,1 +1,73 @@
-<p>rider-list works!</p>
+<div class="container">
+    <table class="table table-sm table-striped table-hover text-center">
+        <thead>
+            <tr class="position-sticky bg-success">
+                <th scope="col" class="p-3">Dni</th>
+                <th scope="col" class="p-3">Nombre</th>
+                <th scope="col" class="p-3">Apellido</th>
+                <th scope="col" class="p-3">Email</th>
+                <th scope="col" class="p-3">Vehiculo</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr *ngFor="let data of riderData" (click)="selectRider(data)" data-bs-toggle="modal"
+                data-bs-target="#detalleRider">
+                <th scope="row">{{ data.dni }}</th>
+                <td>{{ data.nombre }}</td>
+                <td>{{ data.apellido }}</td>
+                <td>{{ data.email }}</td>
+                <td>{{ data.vehiculo }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal fade" id="detalleRider" tabindex="-1" aria-labelledby="detalleRiderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="detalleRiderModalLabel">Detalle de pedidos a entregar del rider</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <h6 class="control-label">Nombre y apellido:</h6>
+                            <p>{{ riderDetailView.nombre}} {{ riderDetailView.apellido}}</p>
+                            
+                        </div>
+                        <div class="col">
+                            <h6 class="control-label">Email:</h6>
+                            <p>{{ riderDetailView.email }}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <table class="table table-sm table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nro pedido</th>
+                                    <th scope="col">Provincia</th>
+                                    <th scope="col">CP</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let detail of riderShipping">
+                                    <td class="p-3">{{ detail.nro_pedido }}</td>
+                                    <td class="p-3">{{ detail.provincia }}</td>
+                                    <td class="p-3">{{ detail.codigo_postal }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Volver
+                </button>
+                <button type="button" class="btn btn-primary" [routerLink]="[]"
+                    data-bs-dismiss="modal">Entregar</button>
+            </div>
+        </div>
+    </div>
+</div>
