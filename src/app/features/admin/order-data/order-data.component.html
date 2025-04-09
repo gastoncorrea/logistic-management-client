@@ -2,7 +2,6 @@
   <table class="table table-sm table-striped table-hover text-center">
     <thead>
       <tr class="position-sticky bg-success">
-        <th scope="col" class="p-3">Id Pedido</th>
         <th scope="col" class="p-3">Nro de pedido</th>
         <th scope="col" class="p-3">Fecha</th>
         <th scope="col" class="p-3">Cliente</th>
@@ -14,8 +13,7 @@
     <tbody class="table-group-divider">
       <tr *ngFor="let data of orderData" (click)="selectOrder(data)" data-bs-toggle="modal"
         data-bs-target="#detallePedido">
-        <th scope="row">{{ data.id_pedido }}</th>
-        <td>{{ data.nro_pedido }}</td>
+        <th scope="row">{{ data.nro_pedido }}</th>
         <td>{{ data.fecha | date:'dd-MM-yyyy' }}</td>
         <td>{{ data.nombre_cliente }}</td>
         <td>{{ data.provincia }}</td>
