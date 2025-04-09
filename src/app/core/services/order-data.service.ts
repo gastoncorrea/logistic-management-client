@@ -10,6 +10,7 @@ export class OrderDataService {
   constructor(private http:HttpClient) { }
   URL = "http://localhost:5000/";
   
+  
   ordersDataProgress():Observable<any>{
     return this.http.get<any[]>(this.URL+'pedidos/in-progress')
   }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoadFileComponent } from './features/admin/load-file/load-file.component';
 import { OrderDataComponent } from './features/admin/order-data/order-data.component';
@@ -6,6 +6,8 @@ import { ShippingComponent } from './features/admin/shipping/shipping.component'
 import { ShippingDataComponent } from './features/admin/shipping-data/shipping-data.component';
 import { RiderFormComponent } from './features/admin/rider-form/rider-form.component';
 import { RiderListComponent } from './features/admin/rider-list/rider-list.component';
+import { DeliveredDataComponent } from './features/admin/delivered-data/delivered-data.component';
+import { SaveDeliveryComponent } from './features/admin/save-delivery/save-delivery.component';
 
 
 const routes: Routes = [
@@ -16,8 +18,9 @@ const routes: Routes = [
     children: [
       { path: 'in-progress', component: OrderDataComponent },
       { path: 'sent', component: ShippingDataComponent },
-      { path: 'delivered', component: OrderDataComponent },
-      { path: 'not-delivered', component: OrderDataComponent }
+      { path: 'delivered', component: DeliveredDataComponent},
+      { path: 'not-delivered', component: OrderDataComponent },
+      { path: 'delivered/save', component: SaveDeliveryComponent}
     ]
   },
   {

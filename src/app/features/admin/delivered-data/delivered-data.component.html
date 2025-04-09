@@ -1,0 +1,73 @@
+<div class="container">
+    <table class="table table-sm table-striped table-hover text-center">
+      <thead>
+        <tr class="position-sticky bg-success">
+          <th scope="col" class="p-3">Nro de pedido</th>
+          <th scope="col" class="p-3">Fecha de entrega</th>
+          <th scope="col" class="p-3">Recibe DNI</th>
+          <th scope="col" class="p-3">Recibe nombre</th>
+          <th scope="col" class="p-3">Rider</th>
+          <th scope="col" class="p-3">Estado</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr *ngFor="let data of deliveredData" (click)="selectDelivered(data)" data-bs-toggle="modal"
+          data-bs-target="#detalleEntrega">
+          <th scope="row">{{ data.nro_pedido }}</th>
+          <td>{{ data.fecha_entrega | date:'dd-MM-yyyy' }}</td>
+          <td>{{ data.recibe_dni}}</td>
+          <td>{{ data.recibe_nombre }}</td>
+          <td>{{ data.rider_nombre }}</td>
+          <td>{{ data.estado }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal fade" id="detalleEntrega" tabindex="-1" aria-labelledby="detalleEntregaModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="detalleEntregaModalLabel">Detalle de la entrega</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-6">
+                <h6 class="control-label">Nro Pedido:</h6>
+                <p class="">{{ deliveryDetail.nro_pedido }}</p>
+              </div>
+              <div class="col-6">
+                <h6 class="control-label">Fecha de entrega:</h6>
+                <p class="">{{deliveryDetail.fecha_entrega| date:'dd-MM-yyyy' }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h6 class="control-label">Recibe:</h6>
+                <p>{{ deliveryDetail.recibe_dni }}</p>
+                <p>{{ deliveryDetail.recibe_nombre }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h6>Entregó:</h6>
+                <p>{{ deliveryDetail.rider_nombre }}</p>
+              </div>
+              <div class="col">
+                <h6>CP:</h6>
+                <p>{{ deliveryDetail.estado }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Volver
+          </button>
+          <button type="button" class="btn btn-primary" [routerLink]="['/delivered']"
+            data-bs-dismiss="modal">Imprimir</button>
+        </div>
+      </div>
+    </div>
+  </div>

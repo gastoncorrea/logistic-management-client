@@ -12,6 +12,8 @@ import { NavbarComponent } from './features/admin/navbar/navbar.component';
 import { ShippingDataComponent } from './features/admin/shipping-data/shipping-data.component';
 import { RiderFormComponent } from './features/admin/rider-form/rider-form.component';
 import { RiderListComponent } from './features/admin/rider-list/rider-list.component';
+import { DeliveredDataComponent } from './features/admin/delivered-data/delivered-data.component';
+import { SaveDeliveryComponent } from './features/admin/save-delivery/save-delivery.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { RiderListComponent } from './features/admin/rider-list/rider-list.compo
     NavbarComponent,
     ShippingDataComponent,
     RiderFormComponent,
-    RiderListComponent
+    RiderListComponent,
+    DeliveredDataComponent,
+    SaveDeliveryComponent
   ],
   imports: [
     BrowserModule,
