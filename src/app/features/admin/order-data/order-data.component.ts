@@ -19,15 +19,10 @@ export class OrderDataComponent implements OnInit {
   }
 
   getData() {
-    this.route.url.subscribe(urlSegments => {
-      // Obtener la última parte de la URL, que es el estado
-      const path = urlSegments[urlSegments.length - 1].path;
-      this.status = path;  // 'in-progress', 'sent', 'delivered', 'not-delivered'
-      this.orderDataService.ordersData(this.status).subscribe((res) => {
+      this.orderDataService.ordersDataProgress().subscribe((res) => {
         this.orderData = res;
         console.log(res);
       }) // Llamar al método para obtener los pedidos
-    });
   }
 
 
@@ -45,8 +40,6 @@ export class OrderDataComponent implements OnInit {
         email: pedido.email,
         detalle_pedido: this.orderDetail,
         provincia: pedido.provincia,
-        direccion: pedido.direccion,
-        direccion2: pedido.direccion2,
         cp: pedido.cp
       }
       console.log(this.orderDetailView.detalle_pedido)

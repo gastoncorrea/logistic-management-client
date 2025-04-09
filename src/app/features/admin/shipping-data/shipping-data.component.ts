@@ -15,7 +15,7 @@ export class ShippingDataComponent implements OnInit {
   constructor(private orderDataService:OrderDataService,private shippingDataService: ShippingDataService) { }
 
   ngOnInit(): void {
-    this.orderDataService.ordersData("sent").subscribe(res=>{
+    this.orderDataService.ordersDataSent().subscribe(res=>{
       this.shippingData = res;
       console.log(res);
     })

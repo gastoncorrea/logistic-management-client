@@ -7,6 +7,7 @@
         <th scope="col" class="p-3">Fecha</th>
         <th scope="col" class="p-3">Cliente</th>
         <th scope="col" class="p-3">Provincia</th>
+        <th scope="col" class="p-3">CP</th>
         <th scope="col" class="p-3">Estado</th>
       </tr>
     </thead>
@@ -18,6 +19,7 @@
         <td>{{ data.fecha | date:'dd-MM-yyyy' }}</td>
         <td>{{ data.nombre_cliente }}</td>
         <td>{{ data.provincia }}</td>
+        <td>{{ data.cp}}</td>
         <td>{{ data.estado }}</td>
       </tr>
     </tbody>
