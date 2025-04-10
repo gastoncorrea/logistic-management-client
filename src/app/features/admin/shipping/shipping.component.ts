@@ -83,7 +83,7 @@ export class ShippingComponent implements OnInit {
           alert("Hubo un error al guardar el envío.");
         },
         complete: () => 
-          this.router.navigate(["/order/delivered"])
+          this.router.navigate(["/order/sent"])
       });
     } else {
       this.form.markAllAsTouched();

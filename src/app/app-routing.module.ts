@@ -20,7 +20,7 @@ const routes: Routes = [
       { path: 'sent', component: ShippingDataComponent },
       { path: 'delivered', component: DeliveredDataComponent},
       { path: 'not-delivered', component: OrderDataComponent },
-      { path: 'delivered/save', component: SaveDeliveryComponent}
+      { path: 'delivered/form/:id', component: SaveDeliveryComponent}
     ]
   },
   {

@@ -13,4 +13,8 @@ export class ShippingService {
   saveShipping(formShipping:any): Observable<any>{
     return this.http.post(this.URL, formShipping);
   }
+
+  getShipping(id:number):Observable<any>{
+    return this.http.get(this.URL+'/find/'+id);
+  }
 }

@@ -1,1 +1,89 @@
-<p>save-delivery works!</p>
+<div class="row justify-content-center align-items-center">
+    <div class="card text-center col-sm-12 col-md-8 col-lg-6 my-5 shadow border-0 p-5">
+      <div class="card-header">Entregar Pedido</div>
+      <div class="card-body">
+        <h5 class="card-title">Completa los datos de la entrega</h5>
+        <p class="card-text">
+          Por favor completa los datos de la entrega que estas por realizar
+        </p>
+        <form [formGroup]="form" (ngSubmit)="sendForm()">
+          <div class="form-floating mb-4">
+            <input type="text" class="form-control border-0 border-bottom shadow-none" id="dni_entrega"
+              placeholder="dni de quien recibe el pedido" formControlName="entrega_dni" [ngClass]="{
+                  'is-invalid': Entrega_dni?.errors && Entrega_dni?.touched,
+                  'is-valid': !Entrega_dni?.errors && Entrega_dni?.touched
+                }"/>
+            <label for="dni_entrega" class="form-label">Dni de quien recibe el pedido:</label>
+          </div>
+          <!-- Validation to input name -->
+          <div *ngIf="Entrega_dni?.errors && Entrega_dni?.touched">
+            <p *ngIf="Entrega_dni?.hasError('required')" class="error">
+              Campo obligatorio
+            </p>
+          </div>
+          <p *ngIf="Entrega_dni?.errors?.['maxlength'] || Entrega_dni?.errors?.['minlength']" class="error">
+            El numero de caracteres debe ser igual a 8
+          </p>
+          <div class="form-floating mb-4">
+            <input type="text" class="form-control border-0 border-bottom shadow-none" id="nombre_entrega"
+              placeholder="nombre y apellido de quien recibe el pedido" formControlName="entrega_nombre" [ngClass]="{
+                  'is-invalid': Entrega_nombre?.errors && Entrega_nombre?.touched,
+                  'is-valid': !Entrega_nombre?.errors && Entrega_nombre?.touched
+                }"/>
+            <label for="nombre_entrega" class="form-label">Nombre y apellido de quien recibe el pedido:</label>
+          </div>
+          <!-- Validation to input name -->
+          <div *ngIf="Entrega_nombre?.errors && Entrega_nombre?.touched">
+            <p *ngIf="Entrega_nombre?.hasError('required')" class="error">
+              Campo obligatorio
+            </p>
+          </div>
+          <p *ngIf="Entrega_nombre?.errors?.['maxlength']" class="error">
+            El numero de caracteres debe ser menor a 50
+          </p>
+          <div class="mb-4 form-floating">
+            <input type="text" class="form-control border-0 border-bottom shadow-none" id="descripcion_entrega"
+              placeholder="descripcion de la entrega" formControlName="descripcion" [ngClass]="{
+                  'is-invalid': Descripcion?.errors && Descripcion?.touched,
+                  'is-valid': !Descripcion?.errors && Descripcion?.touched
+                }"/>
+            <label for="descripcion_entrega" class="form-label">Comentarios sobre la entrega:</label>
+          </div>
+          <p *ngIf="Descripcion?.errors?.['maxlength']" class="error">
+            El numero de caracteres debe ser menor a 50
+          </p>
+          <div class="mb-4 form-floating">
+            <input type="text" class="form-control border-0 border-bottom shadow-none" id="emailRider"
+              placeholder="Email del rider" [value]="envio.rider" readonly/>
+            <label for="emailRider" class="form-label">Email:</label>
+          </div>
+          <!-- Validation to input name -->
+          <div *ngIf="Entrega_rider?.errors && Entrega_rider?.touched">
+            <p *ngIf="Entrega_rider?.hasError('required')" class="error">
+              Campo obligatorio
+            </p>
+          </div>
+          <p *ngIf="Entrega_rider?.errors?.['maxlength']" class="error">
+            El numero de caracteres debe ser menor a 50
+          </p>
+          <div class="mb-4 form-floating">
+            <input type="text" class="form-control border-0 border-bottom shadow-none" id="pedido"
+              placeholder="Numero de pedido" formControlName="nro_pedido" [ngClass]="{
+                  'is-invalid': Nro_pedido?.errors && Nro_pedido?.touched,
+                  'is-valid': !Nro_pedido?.errors && Nro_pedido?.touched
+                }" readonly/>
+            <label for="pedido" class="form-label">Nro pedido:</label>
+          </div>
+          <!-- Validation to input name -->
+          <div *ngIf="Nro_pedido?.errors && Nro_pedido?.touched">
+            <p *ngIf="Nro_pedido?.hasError('required')" class="error">
+              Campo obligatorio
+            </p>
+          </div>
+          <button class="btn btn-outline-primary rounded-pill p-3 fw-bold mt-3 w-100" type="submit">
+            Registrar Entrega
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
