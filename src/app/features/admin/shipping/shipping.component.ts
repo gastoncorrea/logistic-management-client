@@ -76,7 +76,7 @@ export class ShippingComponent implements OnInit {
       console.log(this.form.value);
       this.shippingService.saveShipping(this.form.value).subscribe({
         next: (response) => {
-          alert(response);
+          alert(`✅ ${response.message}\n📦 ID de envío: ${response.id_envio}\n📧 ${response.email}`);
         },
         error: (error) => {
           console.error("Error al guardar:", error);
