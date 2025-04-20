@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class OrderDataComponent implements OnInit {
   status: string = '';
+  selectedOrders: any[] = [];
 
   constructor(private orderDataService: OrderDataService, private route: ActivatedRoute) { }
   orderData: any = [];
@@ -42,8 +43,31 @@ export class OrderDataComponent implements OnInit {
         provincia: pedido.provincia,
         cp: pedido.cp
       }
-      console.log(this.orderDetailView.detalle_pedido)
+      console.log(this.orderDetailView.detalle_pedido);
+      
     })
       ;
+  }
+
+  isSelected(order: any): boolean {
+    return this.selectedOrders.some(o => o.id_pedido === order.id_pedido);
+  } 
+
+  toggleSelection(order: any): void {
+    if (this.isSelected(order)) {
+      this.selectedOrders = this.selectedOrders.filter(o => o.id_pedido !== order.id_pedido);
+    } else {
+      this.selectedOrders.push(order);
+    }
+    console.log(this.selectedOrders);
+  }
+
+  toggleAllSelection(event: any): void {
+    if (event.target.checked) {
+      this.selectedOrders = [...this.orderData]; // seleccionar todos
+    } else {
+      this.selectedOrders = []; // deseleccionar todos
+    }
+    console.log(this.selectedOrders);
   }
 }
