@@ -70,4 +70,8 @@ export class OrderDataComponent implements OnInit {
     }
     console.log(this.selectedOrders);
   }
+
+  multipleShipping(){
+    
+  }
 }

@@ -1,41 +1,46 @@
 <div class="container">
-  <table class="table table-sm table-striped table-hover text-center">
-    <thead>
-      <tr class="position-sticky bg-success">
-        <th><input type="checkbox" (change)="toggleAllSelection($event)" /></th>
-        <th scope="col" class="p-3">Nro de pedido</th>
-        <th scope="col" class="p-3">Fecha</th>
-        <th scope="col" class="p-3">Cliente</th>
-        <th scope="col" class="p-3">Provincia</th>
-        <th scope="col" class="p-3">CP</th>
-        <th scope="col" class="p-3">Estado</th>
-        <th scope="col" class="p-3">Acciones</th>
-      </tr>
-    </thead>
-    <tbody class="table-group-divider">
-      <tr *ngFor="let data of orderData" >
-        <td>
-          <input type="checkbox" [checked]="isSelected(data)" (change)="toggleSelection(data)"
-            (click)="$event.stopPropagation()" />
-        </td>
-        <th scope="row">{{ data.nro_pedido }}</th>
-        <td>{{ data.fecha | date:'dd-MM-yyyy' }}</td>
-        <td>{{ data.nombre_cliente }}</td>
-        <td>{{ data.provincia }}</td>
-        <td>{{ data.cp}}</td>
-        <td>{{ data.estado }}</td>
-        <td>
-          <!-- Botón para ver el detalle -->
-          <button class="btn btn-sm btn-outline-primary"
-                  (click)="selectOrder(data)"
-                  data-bs-toggle="modal"
-                  data-bs-target="#detallePedido">
-            <i class="bi bi-eye"></i> <!-- Ícono de Bootstrap Icons -->
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="bg-white position-sticky">
+    <button class="btn btn-success my-3" [disabled]="selectedOrders.length === 0" (click)="multipleShipping()">
+      Hacer envio seleccionados ({{ selectedOrders.length }})
+    </button>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-sm table-striped text-center">
+      <thead>
+        <tr class="bg-success">
+          <th><input type="checkbox" (change)="toggleAllSelection($event)" /></th>
+          <th scope="col" class="p-3">Nro de pedido</th>
+          <th scope="col" class="p-3">Fecha</th>
+          <th scope="col" class="p-3">Cliente</th>
+          <th scope="col" class="p-3">Provincia</th>
+          <th scope="col" class="p-3">CP</th>
+          <th scope="col" class="p-3">Estado</th>
+          <th scope="col" class="p-3">Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr *ngFor="let data of orderData">
+          <td>
+            <input type="checkbox" [checked]="isSelected(data)" (change)="toggleSelection(data)"
+              (click)="$event.stopPropagation()" />
+          </td>
+          <th scope="row">{{ data.nro_pedido }}</th>
+          <td>{{ data.fecha | date:'dd-MM-yyyy' }}</td>
+          <td>{{ data.nombre_cliente }}</td>
+          <td>{{ data.provincia }}</td>
+          <td>{{ data.cp}}</td>
+          <td>{{ data.estado }}</td>
+          <td>
+            <!-- Botón para ver el detalle -->
+            <button class="btn btn-sm btn-outline-primary" (click)="selectOrder(data)" data-bs-toggle="modal"
+              data-bs-target="#detallePedido">
+              <i class="bi bi-eye"></i> <!-- Ícono de Bootstrap Icons -->
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 <div class="modal fade" id="detallePedido" tabindex="-1" aria-labelledby="detallePedidoModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
