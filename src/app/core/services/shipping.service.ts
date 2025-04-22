@@ -6,9 +6,22 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class ShippingService {
+  private selectedOrders: any[] = [];
   URL = "http://localhost:5000/shipping";
 
   constructor(private http:HttpClient) { }
+
+  setOrdersShipping(orders:any[]){
+    this.selectedOrders = orders;
+  }
+
+  getOrdersShipping():any[]{
+    return this.selectedOrders;
+  }
+
+  clearOrders(){
+    this.selectedOrders = [];
+  }
 
   saveShipping(formShipping:any): Observable<any>{
     return this.http.post(this.URL, formShipping);

@@ -31,6 +31,7 @@ const routes: Routes = [
     ]
   },
 
+  { path: 'shipping', component: ShippingComponent },
   { path: 'shipping/:id', component: ShippingComponent }
 ];
 

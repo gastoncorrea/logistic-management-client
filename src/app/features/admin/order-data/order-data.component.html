@@ -1,6 +1,7 @@
 <div class="container">
   <div class="bg-white position-sticky">
-    <button class="btn btn-success my-3" [disabled]="selectedOrders.length === 0" (click)="multipleShipping()">
+    <button class="btn btn-success my-3" [disabled]="selectedOrders.length === 0"
+      data-bs-toggle="modal" data-bs-target="#seleccionPedido">
       Hacer envio seleccionados ({{ selectedOrders.length }})
     </button>
   </div>
@@ -10,7 +11,7 @@
         <tr class="bg-success">
           <th><input type="checkbox" (change)="toggleAllSelection($event)" /></th>
           <th scope="col" class="p-3">Nro de pedido</th>
-          <th scope="col" class="p-3">Fecha</th>
+          <th scope="col" class="p-3">Ingreso</th>
           <th scope="col" class="p-3">Cliente</th>
           <th scope="col" class="p-3">Provincia</th>
           <th scope="col" class="p-3">CP</th>
@@ -119,3 +120,49 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="seleccionPedido" tabindex="-1" aria-labelledby="seleccionPedidoModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="detallePedidoModalLabel">Lista de pedidos a enviar</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table table-sm table-striped text-center">
+            <thead>
+              <tr class="bg-success">
+                <th><input type="checkbox" (change)="toggleAllSelection($event)" /></th>
+                <th scope="col" class="p-3">Nro de pedido</th>
+                <th scope="col" class="p-3">Fecha</th>
+                <th scope="col" class="p-3">Provincia</th>
+                <th scope="col" class="p-3">CP</th>
+                <th scope="col" class="p-3">Estado</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider">
+              <tr *ngFor="let data of selectedOrders">
+                <td>
+                  <input type="checkbox" [checked]="isSelected(data)" (change)="toggleSelection(data)"
+                    (click)="$event.stopPropagation()" />
+                </td>
+                <th scope="row">{{ data.nro_pedido }}</th>
+                <td>{{ data.fecha | date:'dd-MM-yyyy' }}</td>
+                <td>{{ data.provincia }}</td>
+                <td>{{ data.cp}}</td>
+                <td>{{ data.estado }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Volver
+        </button>
+        <button type="button" class="btn btn-primary" [routerLink]="['/shipping']"
+         (click)="multipleShipping()" data-bs-dismiss="modal">Hacer envio</button>
+      </div>
+    </div>
+  </div>

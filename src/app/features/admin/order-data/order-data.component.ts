@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderDataService } from '../../../core/services/order-data.service';
 import { ActivatedRoute } from '@angular/router';
+import { ShippingService } from 'src/app/core/services/shipping.service';
 
 @Component({
   selector: 'app-order-data',
@@ -11,7 +12,9 @@ export class OrderDataComponent implements OnInit {
   status: string = '';
   selectedOrders: any[] = [];
 
-  constructor(private orderDataService: OrderDataService, private route: ActivatedRoute) { }
+  constructor(private orderDataService: OrderDataService,
+              private route: ActivatedRoute,
+              private shippingService : ShippingService) { }
   orderData: any = [];
   orderDetail: any = [];
   orderDetailView: any = {};
@@ -72,6 +75,9 @@ export class OrderDataComponent implements OnInit {
   }
 
   multipleShipping(){
-    
+    if(this.selectedOrders.length > 0){
+      this.shippingService.setOrdersShipping(this.selectedOrders);
+      console.log(this.shippingService.getOrdersShipping);
+    }
   }
 }

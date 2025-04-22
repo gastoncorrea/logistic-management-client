@@ -59,6 +59,9 @@ export class ShippingComponent implements OnInit {
         });
       });
     }
+    else{
+      
+    }
   }
 
   get Fecha() {
