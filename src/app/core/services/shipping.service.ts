@@ -1,27 +1,29 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from  '@angular/common/http';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShippingService {
-  private selectedOrders: any[] = [];
+  private pedidosSubject = new BehaviorSubject<any[]>([]);
+  selectedOrders$ = this.pedidosSubject.asObservable();
+
   URL = "http://localhost:5000/shipping";
 
   constructor(private http:HttpClient) { }
 
   setOrdersShipping(orders:any[]){
-    this.selectedOrders = orders;
+    this.pedidosSubject.next(orders);
   }
 
-  getOrdersShipping():any[]{
-    return this.selectedOrders;
-  }
+ // getOrdersShipping():any[]{
+ //   return this.selectedOrders;
+ // }
 
-  clearOrders(){
-    this.selectedOrders = [];
-  }
+ // clearOrders(){
+ //   this.selectedOrders = [];
+ // }
 
   saveShipping(formShipping:any): Observable<any>{
     return this.http.post(this.URL, formShipping);
