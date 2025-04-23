@@ -75,8 +75,9 @@ export class OrderDataComponent implements OnInit {
   }
 
   multipleShipping(){
+    
     if(this.selectedOrders.length > 0){
-      
+
       this.shippingService.setOrdersShipping(this.selectedOrders);
       this.shippingService.selectedOrders$.subscribe(pedidos => {
         console.log(pedidos);
