@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderDataService } from '../../../core/services/order-data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ShippingService } from 'src/app/core/services/shipping.service';
 
 @Component({
@@ -11,9 +11,10 @@ import { ShippingService } from 'src/app/core/services/shipping.service';
 export class OrderDataComponent implements OnInit {
   status: string = '';
   selectedOrders: any[] = [];
+  id_pedidos_seleccionados: String[] = [];
 
   constructor(private orderDataService: OrderDataService,
-              private route: ActivatedRoute,
+              private route: Router,
               private shippingService : ShippingService) { }
   orderData: any = [];
   orderDetail: any = [];
@@ -52,6 +53,16 @@ export class OrderDataComponent implements OnInit {
       ;
   }
 
+  send_shipping(detail:any){
+    this.id_pedidos_seleccionados = [];
+    this.id_pedidos_seleccionados.push(detail.nro_pedido);
+    console.log(this.id_pedidos_seleccionados);
+    if(this.id_pedidos_seleccionados.length == 1){
+      this.shippingService.setOrdersShipping(this.id_pedidos_seleccionados);
+      this.route.navigate(['/shipping'])
+    }
+  }
+
   isSelected(order: any): boolean {
     return this.selectedOrders.some(o => o.id_pedido === order.id_pedido);
   } 
@@ -77,11 +88,9 @@ export class OrderDataComponent implements OnInit {
   multipleShipping(){
     
     if(this.selectedOrders.length > 0){
-
-      this.shippingService.setOrdersShipping(this.selectedOrders);
-      this.shippingService.selectedOrders$.subscribe(pedidos => {
-        console.log(pedidos);
-           })
+      this.id_pedidos_seleccionados = this.selectedOrders.map(p => p.nro_pedido);
+      this.shippingService.setOrdersShipping(this.id_pedidos_seleccionados);
+      this.route.navigate(['/shipping'])
     }
   }
 }

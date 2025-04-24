@@ -6,14 +6,14 @@ import {BehaviorSubject, Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class ShippingService {
-  private pedidosSubject = new BehaviorSubject<any[]>([]);
+  private pedidosSubject = new BehaviorSubject<String[]>([]);
   selectedOrders$ = this.pedidosSubject.asObservable();
 
   URL = "http://localhost:5000/shipping";
 
   constructor(private http:HttpClient) { }
 
-  setOrdersShipping(orders:any[]){
+  setOrdersShipping(orders:String[]){
     this.pedidosSubject.next(orders);
   }
 
