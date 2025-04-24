@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderDataService } from '../../../core/services/order-data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ShippingService } from 'src/app/core/services/shipping.service';
 
 @Component({
   selector: 'app-order-data',
@@ -9,8 +10,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class OrderDataComponent implements OnInit {
   status: string = '';
+  selectedOrders: any[] = [];
+  id_pedidos_seleccionados: String[] = [];
 
-  constructor(private orderDataService: OrderDataService, private route: ActivatedRoute) { }
+  constructor(private orderDataService: OrderDataService,
+              private route: Router,
+              private shippingService : ShippingService) { }
   orderData: any = [];
   orderDetail: any = [];
   orderDetailView: any = {};
@@ -42,8 +47,50 @@ export class OrderDataComponent implements OnInit {
         provincia: pedido.provincia,
         cp: pedido.cp
       }
-      console.log(this.orderDetailView.detalle_pedido)
+      console.log(this.orderDetailView.detalle_pedido);
+      
     })
       ;
+  }
+
+  send_shipping(detail:any){
+    this.id_pedidos_seleccionados = [];
+    this.id_pedidos_seleccionados.push(detail.nro_pedido);
+    console.log(this.id_pedidos_seleccionados);
+    if(this.id_pedidos_seleccionados.length == 1){
+      this.shippingService.setOrdersShipping(this.id_pedidos_seleccionados);
+      this.route.navigate(['/shipping'])
+    }
+  }
+
+  isSelected(order: any): boolean {
+    return this.selectedOrders.some(o => o.id_pedido === order.id_pedido);
+  } 
+
+  toggleSelection(order: any): void {
+    if (this.isSelected(order)) {
+      this.selectedOrders = this.selectedOrders.filter(o => o.id_pedido !== order.id_pedido);
+    } else {
+      this.selectedOrders.push(order);
+    }
+    console.log(this.selectedOrders);
+  }
+
+  toggleAllSelection(event: any): void {
+    if (event.target.checked) {
+      this.selectedOrders = [...this.orderData]; // seleccionar todos
+    } else {
+      this.selectedOrders = []; // deseleccionar todos
+    }
+    console.log(this.selectedOrders);
+  }
+
+  multipleShipping(){
+    
+    if(this.selectedOrders.length > 0){
+      this.id_pedidos_seleccionados = this.selectedOrders.map(p => p.nro_pedido);
+      this.shippingService.setOrdersShipping(this.id_pedidos_seleccionados);
+      this.route.navigate(['/shipping'])
+    }
   }
 }

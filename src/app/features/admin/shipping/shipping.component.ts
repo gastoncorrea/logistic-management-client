@@ -14,6 +14,7 @@ export class ShippingComponent implements OnInit {
 
   form: FormGroup;
   idPedido!: number;
+  nro_pedidos : String[] = [];
   riders: any;
 
   constructor(private formBuilder: FormBuilder,
@@ -27,7 +28,6 @@ export class ShippingComponent implements OnInit {
     this.form = this.formBuilder.group(
       {
         fecha: ["", [Validators.required]],
-        nro_pedido: ["", [Validators.required]],
         id_rider: ["", [Validators.required]]
       }
     );
@@ -38,27 +38,18 @@ export class ShippingComponent implements OnInit {
       this.riders = response;
     })
 
+    this.shippingService.selectedOrders$.subscribe(pedidos => {
+      this.nro_pedidos = pedidos;
+      console.log(pedidos);
+         })
+
+
     // Obtener la fecha actual en formato YYYY-MM-DD
     const fechaActual = new Date().toISOString().split('T')[0];
 
     // Asignar la fecha actual al formulario
     this.form.patchValue({ fecha: fechaActual });
 
-    // Obtener el ID del pedido desde la URL
-    const idParam = this.activateRoute.snapshot.paramMap.get('id');
-
-    if (idParam) {
-      this.idPedido = +idParam;
-      // Buscar el pedido en el servicio y llenar el formulario
-      this.orderDataService.orderFindById(this.idPedido).subscribe(pedido => {
-        console.log(pedido)
-        this.form.patchValue({
-          fecha: new Date().toISOString().split('T')[0], // Fecha actual
-          nro_pedido: pedido.nro_pedido, // Número de pedido
-          id_rider: "" // Se seleccionará manualmente
-        });
-      });
-    }
   }
 
   get Fecha() {
@@ -71,12 +62,17 @@ export class ShippingComponent implements OnInit {
     return this.form.get("id_rider");
   }
 
-  sendForm() {
-    if (this.form.valid) {
-      console.log(this.form.value);
-      this.shippingService.saveShipping(this.form.value).subscribe({
+  sendForm() {  
+    if (this.form.valid && this.nro_pedidos.length > 0) {
+      const datosEnvio = {
+        ...this.form.value,
+        nro_pedido: this.nro_pedidos
+      };
+
+      console.log(datosEnvio);
+      this.shippingService.saveShipping(datosEnvio).subscribe({
         next: (response) => {
-          alert(`✅ ${response.message}\n📦 ID de envío: ${response.id_envio}\n📧 ${response.email}`);
+          alert(`✅ ${response.message}\n\nNro Pedido guardados: ${response.pedidos_guardados}\nPedidos No guardados: ${response.pedidos_no_encontrados} \n: ${response.email}`);
         },
         error: (error) => {
           console.error("Error al guardar:", error);
@@ -87,6 +83,9 @@ export class ShippingComponent implements OnInit {
       });
     } else {
       this.form.markAllAsTouched();
+      if (this.nro_pedidos.length === 0) {
+        alert("Debe seleccionar al menos un número de pedido.");
+      }
     }
   }
 }

@@ -21,13 +21,21 @@
             Campo obligatorio
           </p>
         </div>
-        <div class="mb-4 form-floating">
+        <div class="mb-4 form-floating" *ngIf="nro_pedidos.length == 0">
           <input type="text" class="form-control border-0 border-bottom shadow-none" id="nroPedido"
             placeholder="numero de pedido" formControlName="nro_pedido" [ngClass]="{
                 'is-invalid': Nro_pedido?.errors && Nro_pedido?.touched,
                 'is-valid': !Nro_pedido?.errors && Nro_pedido?.touched
               }" readonly/>
           <label for="nroPedido" class="form-label">Nro de pedido:</label>
+        </div>
+        <div *ngIf="nro_pedidos.length > 0" class="mb-4">
+          <label class="form-label fw-bold">Nros de pedido seleccionados:</label>
+          <ul class="list-group">
+            <li *ngFor="let nro of nro_pedidos" class="list-group-item">
+              {{ nro }}
+            </li>
+          </ul>
         </div>
         <!-- Validation to input name -->
         <div *ngIf="Nro_pedido?.errors && Nro_pedido?.touched">
