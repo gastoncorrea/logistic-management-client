@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DeliveryService } from 'src/app/core/services/delivery.service';
-import { ShippingDataService } from 'src/app/core/services/shipping-data.service';
 import { ShippingService } from 'src/app/core/services/shipping.service';
 
 @Component({
@@ -69,10 +68,18 @@ export class SaveDeliveryComponent implements OnInit {
     console.log(this.form.valid);
     if(this.form.valid){
       console.log(this.form.value);
-      this.deliveryService.save_delivery(this.form.value).subscribe((res)=>{
-        alert(res);
-        this.router.navigate(["/order/delivered"])
-      })
+      this.deliveryService.save_delivery(this.form.value).subscribe({
+
+        next: (res) => {alert(`✅${res.message}\n ${res.email}`)},
+
+        error: (error)=>{
+          alert(error.error);
+        },
+
+        complete:() => {
+          this.router.navigate(["/order/delivered"])
+        }
+      });
     }
   }
 

@@ -4,7 +4,7 @@
       <div class="card-body">
         <h5 class="card-title">Completa los datos de la entrega</h5>
         <p class="card-text">
-          Por favor completa los datos de la entrega que estas por realizar
+          Por favor completa los datos de la entrega y de la persona que recibe el producto
         </p>
         <form [formGroup]="form" (ngSubmit)="sendForm()">
           <div class="form-floating mb-4">
@@ -55,7 +55,7 @@
           <div class="mb-4 form-floating">
             <input type="text" class="form-control border-0 border-bottom shadow-none" id="emailRider"
               placeholder="Email del rider" [value]="envio.rider" readonly/>
-            <label for="emailRider" class="form-label">Email:</label>
+            <label for="emailRider" class="form-label">Email de quien entrega:</label>
           </div>
           <!-- Validation to input name -->
           <div *ngIf="Entrega_rider?.errors && Entrega_rider?.touched">
