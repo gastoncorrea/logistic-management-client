@@ -17,14 +17,6 @@ export class ShippingService {
     this.pedidosSubject.next(orders);
   }
 
- // getOrdersShipping():any[]{
- //   return this.selectedOrders;
- // }
-
- // clearOrders(){
- //   this.selectedOrders = [];
- // }
-
   saveShipping(formShipping:any): Observable<any>{
     return this.http.post(this.URL, formShipping);
   }
