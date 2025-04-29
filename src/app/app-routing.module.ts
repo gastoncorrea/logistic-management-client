@@ -8,6 +8,7 @@ import { RiderFormComponent } from './features/admin/rider-form/rider-form.compo
 import { RiderListComponent } from './features/admin/rider-list/rider-list.component';
 import { DeliveredDataComponent } from './features/admin/delivered-data/delivered-data.component';
 import { SaveDeliveryComponent } from './features/admin/save-delivery/save-delivery.component';
+import { NotDeliveredDataComponent } from './features/admin/not-delivered-data/not-delivered-data.component';
 
 
 const routes: Routes = [
@@ -19,7 +20,7 @@ const routes: Routes = [
       { path: 'in-progress', component: OrderDataComponent },
       { path: 'sent', component: ShippingDataComponent },
       { path: 'delivered', component: DeliveredDataComponent},
-      { path: 'not-delivered', component: OrderDataComponent },
+      { path: 'not-delivered', component: NotDeliveredDataComponent },
       { path: 'delivered/form/:id', component: SaveDeliveryComponent}
     ]
   },
