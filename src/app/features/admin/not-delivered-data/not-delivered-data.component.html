@@ -1,0 +1,158 @@
+<div class="container">
+    <div class="table-responsive">
+      <table class="table table-sm table-striped text-center">
+        <thead>
+          <tr class="bg-success">
+            <th><input type="checkbox" (change)="toggleAllSelection($event)" /></th>
+            <th scope="col" class="p-3">Nro de pedido</th>
+            <th scope="col" class="p-3">Fecha devolucion</th>
+            <th scope="col" class="p-3">Rider</th>
+            <th scope="col" class="p-3">Estado</th>
+            <th scope="col" class="p-3">Acciones</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider" *ngIf="notDeliveredData">
+          <tr *ngFor="let data of notDeliveredData">
+            <td>
+              <input type="checkbox" [checked]="isSelected(data)" (change)="toggleSelection(data)"
+                (click)="$event.stopPropagation()" />
+            </td>
+            <th scope="row">{{ data.nro_pedido }}</th>
+            <td>{{ data.fecha_devolucion | date:'dd-MM-yyyy' }}</td>
+            <td>{{ data.rider_nombre }}</td>
+            <td>{{ data.estado}}</td>
+            <td>
+              <!-- Botón para ver el detalle -->
+              <button class="btn btn-sm btn-outline-primary" (click)="selectOrder(data)" data-bs-toggle="modal"
+                data-bs-target="#detallePedido">
+                <i class="bi bi-eye"></i> <!-- Ícono de Bootstrap Icons -->
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal fade" id="detallePedido" tabindex="-1" aria-labelledby="detallePedidoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="detallePedidoModalLabel">Detalle del pedido</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" *ngIf="orderDetailView">
+          <div class="container">
+            <div class="row">
+              <div class="col-6">
+                <h6 class="control-label">Nro Pedido:</h6>
+                <p class="">{{ orderDetailView.nro_pedido }}</p>
+              </div>
+              <div class="col-6">
+                <h6 class="control-label">Fecha:</h6>
+                <p class="">{{ orderDetailView.fecha| date:'dd-MM-yyyy' }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h6 class="control-label">Nombre del Cliente:</h6>
+                <p>{{ orderDetailView.nombre_cliente }}</p>
+              </div>
+              <div class="col">
+                <h6 class="control-label">Email:</h6>
+                <p>{{ orderDetailView.email }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h6>Provincia:</h6>
+                <p>{{ orderDetailView.provincia }}</p>
+              </div>
+              <div class="col">
+                <h6>CP:</h6>
+                <p>{{ orderDetailView.cp }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h6>Direccion:</h6>
+                <p>{{ orderDetailView.direccion }}</p>
+              </div>
+              <div class="col">
+                <h6>Más detalles:</h6>
+                <p>{{ orderDetailView.direccion2 }}</p>
+              </div>
+            </div>
+            <div>
+              <table class="table table-sm table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre del producto</th>
+                    <th scope="col">Un.</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let detail of orderDetailView.detalle_pedido">
+                    <td>{{ detail.producto }}</td>
+                    <td class="p-3">{{ detail.cantidad }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Volver
+          </button>
+          <button type="button" class="btn btn-primary"
+            data-bs-dismiss="modal">Hacer envio</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="seleccionPedido" tabindex="-1" aria-labelledby="seleccionPedidoModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="detallePedidoModalLabel">Lista de pedidos a enviar</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="table-responsive">
+            <table class="table table-sm table-striped text-center">
+              <thead>
+                <tr class="bg-success">
+                  <th><input type="checkbox" (change)="toggleAllSelection($event)" /></th>
+                  <th scope="col" class="p-3">Nro de pedido</th>
+                  <th scope="col" class="p-3">Fecha</th>
+                  <th scope="col" class="p-3">Provincia</th>
+                  <th scope="col" class="p-3">CP</th>
+                  <th scope="col" class="p-3">Estado</th>
+                </tr>
+              </thead>
+              <tbody class="table-group-divider">
+                <tr *ngFor="let data of selectedOrders">
+                  <td>
+                    <input type="checkbox" [checked]="isSelected(data)" (change)="toggleSelection(data)"
+                      (click)="$event.stopPropagation()" />
+                  </td>
+                  <th scope="row">{{ data.nro_pedido }}</th>
+                  <td>{{ data.fecha | date:'dd-MM-yyyy' }}</td>
+                  <td>{{ data.provincia }}</td>
+                  <td>{{ data.cp}}</td>
+                  <td>{{ data.estado }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Volver
+          </button>
+          <button type="button" class="btn btn-primary"
+             data-bs-dismiss="modal">Hacer envio</button>
+        </div>
+      </div>
+    </div>

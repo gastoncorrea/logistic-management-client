@@ -13,4 +13,8 @@ export class DeliveryService {
   save_delivery(delivery:any):Observable<any>{
     return this.http.post(this.URL+'save',delivery);
   }
+
+  save_not_delivery(returned:any):Observable<any>{
+    return this.http.post(this.URL+'not/save', returned);
+  }
 }

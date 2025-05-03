@@ -72,7 +72,7 @@ export class ShippingComponent implements OnInit {
       console.log(datosEnvio);
       this.shippingService.saveShipping(datosEnvio).subscribe({
         next: (response) => {
-          alert(`✅ ${response.message}\n\nNro Pedido guardados: ${response.pedidos_guardados}\nPedidos No guardados: ${response.pedidos_no_encontrados} \n: ${response.email}`);
+          alert(`✅ ${response.message}\n\nNro Pedido guardados: ${response.pedidos_guardados}\nPedidos No guardados: ${response.pedidos_no_encontrados} \n ${response.email}`);
         },
         error: (error) => {
           console.error("Error al guardar:", error);
