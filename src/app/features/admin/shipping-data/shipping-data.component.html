@@ -73,7 +73,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [routerLink]="['/order/not-delivered/']">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [routerLink]="['/order/not-delivered/form/', shippingDetail.id_envio]">
           Devolver
         </button>
         <button type="button" class="btn btn-primary" [routerLink]="['/order/delivered/form/', shippingDetail.id_envio]"

@@ -23,6 +23,10 @@ export class OrderDataService {
     return this.http.get<any[]>(this.URL+'pedidos/delivered')
   }
 
+  ordersDataNotDelivered():Observable<any>{
+    return this.http.get<any[]>(this.URL+'pedidos/not-delivered')
+  }
+
   orderDetail(id_pedido:number):Observable<any>{
     console.log(this.URL+'detail/'+id_pedido);
     return this.http.get<any>(this.URL+'detail/'+id_pedido);
