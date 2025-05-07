@@ -18,8 +18,13 @@ export class DeliveredDataComponent implements OnInit {
     })
   }
 
-  selectDelivered(delivey:any){
-
+  selectDelivered(delivery:any){
+    this.deliveryDetail.nro_pedido = delivery.nro_pedido;
+    this.deliveryDetail.fecha_entrega = delivery.fecha_entrega;
+    this.deliveryDetail.recibe_nombre = delivery.recibe_nombre;
+    this.deliveryDetail.recibe_dni = delivery.recibe_dni;
+    this.deliveryDetail.rider_nombre = delivery.rider_nombre;
+    this.deliveryDetail.descripcion_entrega = delivery.descripcion_entrega;
   }
 
 }
