@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoadFileService {
 
-  private apiUrl = 'http://localhost:5000/upload';  // Cambia esto según tu backend
+  private apiUrl = environment.apiUrl+'upload';  // Cambia esto según tu backend
 
   constructor(private http: HttpClient) {}
 
