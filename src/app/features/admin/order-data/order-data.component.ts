@@ -9,6 +9,7 @@ import { ShippingService } from 'src/app/core/services/shipping.service';
   styleUrls: ['./order-data.component.css']
 })
 export class OrderDataComponent implements OnInit {
+  isLoading = true;
   status: string = '';
   selectedOrders: any[] = [];
   id_pedidos_seleccionados: String[] = [];
@@ -20,7 +21,9 @@ export class OrderDataComponent implements OnInit {
   orderDetail: any = [];
   orderDetailView: any = {};
   ngOnInit(): void {
+    console.log(this.isLoading);
     this.getData();
+    this.isLoading = false;
   }
 
   getData() {

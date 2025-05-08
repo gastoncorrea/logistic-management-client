@@ -9,6 +9,7 @@ import { RiderService } from 'src/app/core/services/rider.service';
   styleUrls: ['./rider-form.component.css']
 })
 export class RiderFormComponent implements OnInit {
+  isLoading = true;
   form: FormGroup
   constructor(private formBuilder: FormBuilder,private riderService: RiderService, private router:Router) { 
     this.form = this.formBuilder.group(
@@ -24,6 +25,7 @@ export class RiderFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoading = false;
   }
 
   get Nombre(){
@@ -47,10 +49,17 @@ export class RiderFormComponent implements OnInit {
 
   sendForm(){
     if(this.form.valid){
+      this.isLoading = true;
       console.log(this.form.value);
-      this.riderService.saveRider(this.form.value).subscribe(res =>{
-        alert(res);
+      this.riderService.saveRider(this.form.value).subscribe({
+        next:(res) =>{
+        this.isLoading = false;
+        alert(`✅ ${res.message}\n\nEl rider creado tiene id: ${res.id_rider}`);
         this.router.navigate(["/rider/list"])
+      },
+      error: (error)=>{
+        alert(error);
+      }
       })
     }
   }

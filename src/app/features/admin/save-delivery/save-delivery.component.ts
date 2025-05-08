@@ -10,6 +10,7 @@ import { ShippingService } from 'src/app/core/services/shipping.service';
   styleUrls: ['./save-delivery.component.css']
 })
 export class SaveDeliveryComponent implements OnInit {
+  isLoading =true;
   form: FormGroup;
   envio:any = [];
 
@@ -62,15 +63,20 @@ export class SaveDeliveryComponent implements OnInit {
         });
       });
     }
+
+    this.isLoading = false;
   }
 
   sendForm(){
     console.log(this.form.valid);
     if(this.form.valid){
       console.log(this.form.value);
+      this.isLoading = true;
       this.deliveryService.save_delivery(this.form.value).subscribe({
 
-        next: (res) => {alert(`✅${res.message}\n ${res.email}`)},
+        next: (res) => {
+          this.isLoading = false;
+          alert(`✅${res.message}\n ${res.email}`)},
 
         error: (error)=>{
           alert(error.error);

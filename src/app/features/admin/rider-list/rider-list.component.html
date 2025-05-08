@@ -1,26 +1,29 @@
-<div class="container">
-    <table class="table table-sm table-striped table-hover text-center">
-        <thead>
-            <tr class="position-sticky bg-success">
-                <th scope="col" class="p-3">Dni</th>
-                <th scope="col" class="p-3">Nombre</th>
-                <th scope="col" class="p-3">Apellido</th>
-                <th scope="col" class="p-3">Email</th>
-                <th scope="col" class="p-3">Vehiculo</th>
-            </tr>
-        </thead>
-        <tbody class="table-group-divider">
-            <tr *ngFor="let data of riderData" (click)="selectRider(data)" data-bs-toggle="modal"
-                data-bs-target="#detalleRider">
-                <th scope="row">{{ data.dni }}</th>
-                <td>{{ data.nombre }}</td>
-                <td>{{ data.apellido }}</td>
-                <td>{{ data.email }}</td>
-                <td>{{ data.vehiculo }}</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<app-spinner *ngIf="isLoading"></app-spinner>
+<div class="container" *ngIf="!isLoading">
+    <div class="table-responsive">
+        <table class="table table-sm table-striped table-hover text-center">
+            <thead>
+                <tr class="position-sticky bg-success">
+                    <th scope="col" class="p-3">Dni</th>
+                    <th scope="col" class="p-3">Nombre</th>
+                    <th scope="col" class="p-3">Apellido</th>
+                    <th scope="col" class="p-3">Email</th>
+                    <th scope="col" class="p-3">Vehiculo</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <tr *ngFor="let data of riderData" (click)="selectRider(data)" data-bs-toggle="modal"
+                    data-bs-target="#detalleRider">
+                    <th scope="row">{{ data.dni }}</th>
+                    <td>{{ data.nombre }}</td>
+                    <td>{{ data.apellido }}</td>
+                    <td>{{ data.email }}</td>
+                    <td>{{ data.vehiculo }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
 <div class="modal fade" id="detalleRider" tabindex="-1" aria-labelledby="detalleRiderModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">

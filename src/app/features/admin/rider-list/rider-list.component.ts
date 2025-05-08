@@ -7,6 +7,7 @@ import { RiderService } from 'src/app/core/services/rider.service';
   styleUrls: ['./rider-list.component.css']
 })
 export class RiderListComponent implements OnInit {
+  isLoading = true;
   riderData:any=[];
   riderDetailView:any=[];
   riderShipping:any=[];
@@ -18,6 +19,7 @@ export class RiderListComponent implements OnInit {
       console.log(res);
       this.riderData = res;
     })
+    this.isLoading = false;
   }
 
   selectRider(rider:any){

@@ -11,7 +11,7 @@ import { ShippingService } from 'src/app/core/services/shipping.service';
   styleUrls: ['./shipping.component.css']
 })
 export class ShippingComponent implements OnInit {
-
+  isLoading = true;
   form: FormGroup;
   idPedido!: number;
   nro_pedidos : String[] = [];
@@ -49,7 +49,7 @@ export class ShippingComponent implements OnInit {
 
     // Asignar la fecha actual al formulario
     this.form.patchValue({ fecha: fechaActual });
-
+    this.isLoading = false;
   }
 
   get Fecha() {
@@ -70,7 +70,9 @@ export class ShippingComponent implements OnInit {
       };
 
       console.log(datosEnvio);
+      this.isLoading = true;
       this.shippingService.saveShipping(datosEnvio).subscribe({
+        
         next: (response) => {
           alert(`✅ ${response.message}\n\nNro Pedido guardados: ${response.pedidos_guardados}\nPedidos No guardados: ${response.pedidos_no_encontrados} \n ${response.email}`);
         },
@@ -78,10 +80,13 @@ export class ShippingComponent implements OnInit {
           console.error("Error al guardar:", error);
           alert("Hubo un error al guardar el envío.");
         },
-        complete: () => 
-          this.router.navigate(["/order/sent"])
+        complete: () => {
+          this.isLoading = false;
+          this.router.navigate(["/order/sent"]);
+        }
       });
     } else {
+      this.isLoading = false;
       this.form.markAllAsTouched();
       if (this.nro_pedidos.length === 0) {
         alert("Debe seleccionar al menos un número de pedido.");

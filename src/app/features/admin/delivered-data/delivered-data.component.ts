@@ -7,6 +7,7 @@ import { OrderDataService } from 'src/app/core/services/order-data.service';
   styleUrls: ['./delivered-data.component.css']
 })
 export class DeliveredDataComponent implements OnInit {
+  isLoading = true;
   deliveredData:any = [];
   deliveryDetail:any = [];
 
@@ -16,10 +17,17 @@ export class DeliveredDataComponent implements OnInit {
     this.orderDataService.ordersDataDelivered().subscribe((res)=>{
       this.deliveredData = res;
     })
+
+    this.isLoading = false;
   }
 
-  selectDelivered(delivey:any){
-
+  selectDelivered(delivery:any){
+    this.deliveryDetail.nro_pedido = delivery.nro_pedido;
+    this.deliveryDetail.fecha_entrega = delivery.fecha_entrega;
+    this.deliveryDetail.recibe_nombre = delivery.recibe_nombre;
+    this.deliveryDetail.recibe_dni = delivery.recibe_dni;
+    this.deliveryDetail.rider_nombre = delivery.rider_nombre;
+    this.deliveryDetail.descripcion_entrega = delivery.descripcion_entrega;
   }
 
 }
