@@ -1,4 +1,6 @@
-<div class="container">
+<app-spinner *ngIf="isLoading"></app-spinner>
+
+<div class="container" *ngIf="!isLoading">
   <div class="bg-white position-sticky">
     <button class="btn btn-success my-3" [disabled]="selectedOrders.length === 0"
       data-bs-toggle="modal" data-bs-target="#seleccionPedido">

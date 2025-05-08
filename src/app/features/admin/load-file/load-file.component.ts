@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild, inject } from '@angular/core';
 import { LoadFileService } from 'src/app/core/services/load-file.service';
-import {OrderDataComponent} from '../order-data/order-data.component'
+import { OrderDataComponent } from '../order-data/order-data.component'
 import { Router } from '@angular/router';
 
 
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./load-file.component.css']
 })
 export class LoadFileComponent implements OnInit, AfterViewInit {
-
+  isLoading = false;
   allowMultipleFiles = true;
   dragOver = false;
   selectedFiles: File[] = [];
@@ -20,7 +20,7 @@ export class LoadFileComponent implements OnInit, AfterViewInit {
   @ViewChild('dropArea') dropArea!: ElementRef;
 
 
-  constructor(private renderer2: Renderer2, private uploadService: LoadFileService,private router: Router) { }
+  constructor(private renderer2: Renderer2, private uploadService: LoadFileService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -107,19 +107,19 @@ export class LoadFileComponent implements OnInit, AfterViewInit {
   isCSV(file: File): boolean {
     const validMimeTypes = ['text/csv', 'application/vnd.ms-excel'];
     const validExtensions = ['.csv'];
-    
+
     // Verifica el tipo MIME
     if (validMimeTypes.includes(file.type)) {
       return true;
     }
-  
+
     // Si el tipo MIME no está definido, verifica la extensión del nombre de archivo
     const fileExtension = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
     return validExtensions.includes(fileExtension);
   }
 
 
-  
+
 
   uploadFiles() {
     console.log("Enviar", this.selectedFiles);
@@ -127,21 +127,26 @@ export class LoadFileComponent implements OnInit, AfterViewInit {
       alert("No hay archivos para enviar.");
       return;
     }
+    this.isLoading = true;
 
-    this.uploadService.uploadFiles(this.selectedFiles).subscribe(
-      response => {
+    this.uploadService.uploadFiles(this.selectedFiles).subscribe({
+      next: (response) => {
+        this.isLoading = false;
         console.log('Archivos subidos con éxito:', response);
-        alert(response.mensaje+"\n"+
-         "Pedidos guardados: " + response.guardados + "\n" +
-         "Pedidos duplicados: "  +response.duplicados
+        alert(response.mensaje + "\n" +
+          "Pedidos guardados: " + response.guardados + "\n" +
+          "Pedidos duplicados: " + response.duplicados
         );
-        this.router.navigate(['/order/in-progress']);
-    
       },
-      error => {
+      error: (error) => {
+        this.isLoading = false;
         console.error('Error al subir archivos:', error);
         alert('Error al enviar los archivos');
-      }
-    );
+      },
+      complete: () =>
+        this.router.navigate(['/order/in-progress'])
+    });
+
+
   }
 }

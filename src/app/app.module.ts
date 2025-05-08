@@ -16,6 +16,7 @@ import { DeliveredDataComponent } from './features/admin/delivered-data/delivere
 import { SaveDeliveryComponent } from './features/admin/save-delivery/save-delivery.component';
 import { NotDeliveredDataComponent } from './features/admin/not-delivered-data/not-delivered-data.component';
 import { NotDeliveredFormComponent } from './features/admin/not-delivered-form/not-delivered-form.component';
+import { SpinnerComponent } from './features/shared/spinner/spinner.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { NotDeliveredFormComponent } from './features/admin/not-delivered-form/n
     DeliveredDataComponent,
     SaveDeliveryComponent,
     NotDeliveredDataComponent,
-    NotDeliveredFormComponent
+    NotDeliveredFormComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

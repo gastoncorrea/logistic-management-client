@@ -10,6 +10,7 @@ import { ShippingService } from 'src/app/core/services/shipping.service';
   styleUrls: ['./not-delivered-form.component.css']
 })
 export class NotDeliveredFormComponent implements OnInit {
+  isLoading = true;
   form: FormGroup;
     envio:any = [];
 
@@ -44,6 +45,7 @@ export class NotDeliveredFormComponent implements OnInit {
         });
       });
     }
+    this.isLoading = false;
   }
 
   get Descripcion(){
@@ -60,9 +62,12 @@ export class NotDeliveredFormComponent implements OnInit {
     console.log(this.form.valid);
     if(this.form.valid){
       console.log(this.form.value);
+      this.isLoading = true;
       this.deliveryService.save_not_delivery(this.form.value).subscribe({
 
-        next: (res) => {alert(`✅${res.message}\n ${res.email}`)},
+        next: (res) => {
+          this.isLoading = false;
+          alert(`✅${res.message}\n ${res.email}`)},
 
         error: (error)=>{
           alert(error.error);

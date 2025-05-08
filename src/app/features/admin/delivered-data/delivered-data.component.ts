@@ -7,6 +7,7 @@ import { OrderDataService } from 'src/app/core/services/order-data.service';
   styleUrls: ['./delivered-data.component.css']
 })
 export class DeliveredDataComponent implements OnInit {
+  isLoading = true;
   deliveredData:any = [];
   deliveryDetail:any = [];
 
@@ -16,6 +17,8 @@ export class DeliveredDataComponent implements OnInit {
     this.orderDataService.ordersDataDelivered().subscribe((res)=>{
       this.deliveredData = res;
     })
+
+    this.isLoading = false;
   }
 
   selectDelivered(delivery:any){
