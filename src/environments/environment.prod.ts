@@ -1,4 +1,4 @@
-export const environment:{production:boolean,apiUrl:string} = {
+export const environment = {
   production: true,
-  apiUrl:""
+  apiUrl: "https://logisticmanagement-production.up.railway.app/"
 };
