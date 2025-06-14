@@ -48,7 +48,8 @@ export class OrderDataComponent implements OnInit {
         email: pedido.email,
         detalle_pedido: this.orderDetail,
         provincia: pedido.provincia,
-        cp: pedido.cp
+        cp: pedido.cp,
+        direccion: pedido.direccion
       }
       console.log(this.orderDetailView.detalle_pedido);
       
